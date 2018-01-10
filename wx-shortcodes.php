@@ -3,7 +3,6 @@
 defined( 'ABSPATH' ) or die( 'No No NO!' );
 
 /*includes*/
-include 'shortcodes/wx_buttons.php';
 
 
 Class Wx_Shortcodes {
@@ -11,7 +10,20 @@ Class Wx_Shortcodes {
 	public domain = 'wx-shortcodes';
 	
 	function __construct (){
+		$this->init();
+	}
 
+	function init(){
+		$enabled_shortcodes = array(
+			'wx_buttons'
+		);
+
+		foreach ($enabled_shortcodes as $v) {
+			$f = 'shortcodes/'.$v.'.php';
+			if(file_exists($f)){
+				include $f;
+			}
+		}
 	}
 
 	function register_settings(){
