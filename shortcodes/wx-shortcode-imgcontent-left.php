@@ -44,6 +44,9 @@ function text_img_shortcode( $atts,$content ) {
     
 }
 add_shortcode( 'text_image_shortcode', 'text_img_shortcode' );
+
+
+
 add_action( 'vc_before_init', 'my_text_image_shortcode' );
 function my_text_image_shortcode() {
    vc_map( array(
