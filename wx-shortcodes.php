@@ -25,8 +25,8 @@ Class Wx_Shortcodes {
 
 	function init(){
 		$enabled_shortcodes = array(
-			'wx_buttons',
-			'wx_buttons',
+// 			'wx_buttons',
+// 			'wx_buttons',
 		);
 
 		foreach ($enabled_shortcodes as $v) {
