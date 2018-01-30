@@ -1,5 +1,5 @@
-/***************/
-// [my_testimonial_shortcode ]
+<?php
+
 function testiminial_details( $atts,$content ) {
     
     $a = shortcode_atts( array(

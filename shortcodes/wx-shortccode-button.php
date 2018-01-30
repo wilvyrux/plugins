@@ -1,5 +1,5 @@
-/***************/
-// [my_custom_buttons_shortcode ]
+<?php
+
 function buttons_shortcode( $atts ) {
     $a = shortcode_atts( array(
         'text_attr' => 'readmore',
@@ -162,4 +162,4 @@ function my_custom_buttons_shortcode_vs() {
       )
    ) );
 }
-/*************/
+

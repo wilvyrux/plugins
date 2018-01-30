@@ -1,5 +1,6 @@
-/***************/
-// [my_custom_address_shortcode ]
+<?php
+
+
 function details_address_shortcode( $atts ) {
     
     $a = shortcode_atts( array(
