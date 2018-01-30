@@ -1,5 +1,6 @@
-/***************/
-// [my_custom_heading_shortcode ]
+<?php
+
+
 function heading_shortcode( $atts ) {
     $a = shortcode_atts( array(
         'text_attr' => 'insert heading title',
