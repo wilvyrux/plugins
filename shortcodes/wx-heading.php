@@ -1,10 +1,10 @@
 <?php
 
-
 function heading_shortcode( $atts ) {
     $a = shortcode_atts( array(
         'text_attr' => 'insert heading title',
         'text_attr2' => 'insert subtitle heading',
+        'icon' => '',
         'dropdown_attr' => 'primary-heading',
         'dropdown_attr2' => 'align-left',
         'dropdown_attr3' => 'no-subtitle',
@@ -12,7 +12,7 @@ function heading_shortcode( $atts ) {
         'image_attr' => 'attach_image',
         'dropdown_alignment_attr' => 'left',
     ), $atts );
-    
+
     $text_value = $a['text_attr'];
     $text_value2 = $a['text_attr2'];
     $dropdown_value = $a['dropdown_attr'];
@@ -22,27 +22,29 @@ function heading_shortcode( $atts ) {
     $image_id = $a['image_attr'];
     $href = vc_build_link( $a['url_link'] );
     $image = wp_get_attachment_image($image_id, 'full');
-    
+
         $html .= '<div class="wx-heading '. $dropdown_value2 .' '.$dropdown_value3.' '.$dropdown_value4.'">';
-        $html .= '<h1 class="'. $dropdown_value .'">'. $text_value .'</h1>';
+        $html .= '<h1 class="'. $dropdown_value .'"><i class="'.$atts['icon'].'"></i> '. $text_value .'</h1>';
         $html .= '<p class="heading-subtitle"> '. $text_value2 .' </p>';
         $html .= '<div class="image"> '. $image .' </div>';
         $html .= '</div>';
-       
+
     return $html;
-    
-    
-    
-    
+
+
+
+
 }
 add_shortcode( 'my_custom_shortcode', 'heading_shortcode' );
+
+
 add_action( 'vc_before_init', 'my_custom_heading_shortcode_vs' );
 function my_custom_heading_shortcode_vs() {
    vc_map( array(
       "name" => __( "WX Headings", "my-dropdown-domain" ),
       "base" => "my_custom_shortcode",
       "class" => "",
-      "category" => __( "WX Custom Shortcode", "my-text-domain"),
+      "category" => __( "SpiderOwl_shortcode", "my-text-domain"),
       "params" => array(
          array(
             "type" => "dropdown",
@@ -57,7 +59,7 @@ function my_custom_heading_shortcode_vs() {
                     'Fourth'    =>  'fourth-heading',
                 )
          ),
-       
+
          array(
             "type" => "dropdown",
             "heading" => __( "Text align", "my-text-domain" ),
@@ -70,7 +72,7 @@ function my_custom_heading_shortcode_vs() {
                     'right'    =>  'align-right',
                 )
          ),
-       
+
         array(
             "type" => "dropdown",
             "heading" => __( "Insert Subtitle", "my-text-domain" ),
@@ -82,8 +84,22 @@ function my_custom_heading_shortcode_vs() {
                     'With Subtitle'    =>  'With-Subtitle',
                 )
          ),
-       
-       
+
+         array(
+            "type" => "textfield",
+            "heading" => __( "Subtitle Heading", "my-text-domain" ),
+            "param_name" => "text_attr2",
+            "value" => __( "Default param value 2", "my-text-domain" ),
+            "admin_label" => true,
+            "description" => __( "Insert the subtitle heading.", "my-text-domain" ),
+            "dependency"  => array(
+                    'element'=> 'dropdown_attr3',
+                    'value'=>'With-Subtitle'
+            ),
+
+         ),
+
+
         array(
             "type" => "dropdown",
             "heading" => __( "Select image", "my-text-domain" ),
@@ -95,22 +111,10 @@ function my_custom_heading_shortcode_vs() {
                     'With Image'    =>  'With-image',
                 )
          ),
-       
-       
-         array(
-            "type" => "textfield",
-            "heading" => __( "Text Heading", "my-text-domain" ),
-            "param_name" => "text_attr",
-            "value" => __( "Default param value", "my-text-domain" ),
-            "admin_label" => true,
-            "description" => __( "Insert the heading word.", "my-text-domain" )
-         ),
-       
-       
-          
+
          array(
             "type" => "attach_image",
-            "heading" => __( "Text Heading", "my-text-domain" ),
+            "heading" => __( "Insert your Image here", "my-text-domain" ),
             "param_name" => "image_attr",
             "value" => __( "Default param value", "my-text-domain" ),
             "admin_label" => true,
@@ -120,26 +124,34 @@ function my_custom_heading_shortcode_vs() {
                     'value'=>'With-image'
             ),
          ),
-       
-       
-       
-        array(
+
+
+         array(
             "type" => "textfield",
-            "heading" => __( "Subtitle Heading", "my-text-domain" ),
-            "param_name" => "text_attr2",
-            "value" => __( "Default param value 2", "my-text-domain" ),
+            "heading" => __( "Text Heading", "my-text-domain" ),
+            "param_name" => "text_attr",
+            "value" => __( "Default param value", "my-text-domain" ),
             "admin_label" => true,
-            "description" => __( "Insert the subtitle heading.", "my-text-domain" ),
-            "dependency"  => array(
-                    'element'=> 'dropdown_attr3',
-                    'value'=>'With-Subtitle'
-            ),
-       
-     
-       
+            "description" => __( "Insert the heading word.", "my-text-domain" )
          ),
-       
+
+         array(
+            'type'			=>	'iconpicker',
+            'heading'		=>	_x( 'Icon', 'backend', 'vc-elements-pt' ),
+            'param_name'	=>	'icon',
+            'value'			=>	'fa fa-home',
+            'description'	=>	_x( 'Select icon from library.', 'backend', 'vc-elements-pt' ),
+            'settings'		=>	array(
+                                    'emptyIcon'		=>	true,
+                                    'iconsPerPage'	=>	100,
+                                )
+        ),
+
+
+
+
+
+
       )
    ) );
 }
-/*************/

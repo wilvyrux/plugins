@@ -6,7 +6,7 @@
 /*
 Plugin Name: WX Shortcodes
 Plugin URI: #
-Description: 
+Description: this is sample plugins
 Author: Spider Owls
 Version: 1.0
 Author URI: #
@@ -18,7 +18,7 @@ Class Wx_Shortcodes {
 
 	public $domain = 'wx-shortcodes';
 	public $plugin_path = '';
-	
+
 	function __construct (){
 		$this->plugin_path = dirname(__FILE__);
 		$this->init();
@@ -26,7 +26,8 @@ Class Wx_Shortcodes {
 
 	function init(){
 		$enabled_shortcodes = array(
-			'wx_buttons',
+			'wx-button',
+			'wx-heading',
 // 			'wx_buttons',
 		);
 		foreach ($enabled_shortcodes as $v) {
